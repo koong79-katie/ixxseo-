@@ -1,0 +1,175 @@
+<!doctype html><html lang="ko"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>보놈 특별 초대권 방탈출</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#edf6fb;color:#203447;font-family:"Malgun Gothic",Arial,sans-serif}.wrap{max-width:820px;margin:auto;padding:18px}.hero{background:linear-gradient(135deg,#102d4b,#287ba5);color:white;padding:25px;border-radius:20px}.hero h1{font-size:clamp(27px,5vw,40px);margin:12px 0}.card{background:white;border:1px solid #d5e3ec;border-radius:16px;padding:18px;margin-top:14px;box-shadow:0 5px 18px #193b5510}.muted{color:#63798a;font-size:14px;line-height:1.7}.scene{background:linear-gradient(135deg,#e0f2fa,#b8d9e9);color:#173c58;border-radius:13px;padding:18px;text-align:center;margin:14px 0}.art{font-size:52px}.tag{font-size:11px;background:#eaf3f8;color:#286589;padding:5px 10px;border-radius:20px}.track{height:8px;background:#e5edf2;border-radius:9px;margin-top:10px;overflow:hidden}.fill{height:100%;background:#378dbb;width:0}.rooms{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;text-align:center;font-size:11px;margin-top:12px}.rooms span{background:#f0f5f8;padding:8px 2px;border-radius:8px}.rooms .done{background:#dcefe4;color:#24674b}.rooms .active{background:#d9edf8;color:#205879;font-weight:bold}.hot{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:10px}.hot button,.secondary,.option{border:1px solid #d4e1e9;background:white;color:#203447;border-radius:9px;padding:10px;cursor:pointer}.hot button{font-size:12px}.passage{font:15px/1.75 Georgia,serif;background:#f3f8fb;border-left:4px solid #80b4d0;padding:13px;border-radius:8px;margin-top:10px}.question{background:#f2f7fa;padding:14px;border-radius:12px;margin-top:14px}#question{white-space:pre-line;display:block}.options{display:grid;gap:8px}.option{text-align:left}.option.correct{background:#e3f3e9;border-color:#71ad86}.primary{background:#205f8c;color:white;border:0;border-radius:10px;padding:12px 15px;font-weight:bold;cursor:pointer}.secondary{background:#f4f7f9}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.feedback{min-height:25px;font-size:13px;margin-top:10px;line-height:1.6}.letters{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}.letter small{font-size:10px}.letter{width:36px;height:36px;border-radius:8px;background:#edf2f5;color:#778895;display:grid;place-items:center;font-weight:bold}.letter.found{background:#205f8c;color:white}.hidden{display:none!important}.ticket{background:#fff9e9;border:4px double #a47b30;border-radius:16px;padding:24px;color:#5c4820;margin-top:15px}.ticket .big{font-size:34px;font-weight:900;letter-spacing:3px}.center{text-align:center}.footer{text-align:center;color:#718393;font-size:11px;margin:18px}@media print{body{background:white}.wrap>*:not(#complete){display:none!important}#complete{display:block!important;border:0;box-shadow:none}#complete .actions,#complete .printnote{display:none!important}.ticket{max-width:700px;margin:30px auto;print-color-adjust:exact}}
+</style>
+<div class="wrap">
+<header class="hero"><div style="letter-spacing:2px;font-size:12px">CANADA · QUEBEC WINTER CARNIVAL</div><h1>퀘벡 겨울 축제의<br>비밀 암호를 찾아라!</h1><p>여덟 가지 영어 미션을 해결하고 축제 곳곳의 단서를 모으세요.<br>모든 단서를 모으면 퀘벡 겨울 축제의 특별한 초대권이 열립니다.</p><div class="art">☃️ ❄️ 🏰</div></header>
+<section class="card"><b id="roomLabel">미션 시작 전</b><span style="float:right" id="progressLabel">0 / 8 완료</span><div class="track"><div class="fill" id="progressFill"></div></div><div class="rooms" id="roomNav"></div></section>
+<section class="card" id="welcome"><span class="tag">특별 미션 안내</span><h2>보놈이 여러분을 기다리고 있어요!</h2><div class="scene"><div class="art">☃️🎩🎟️</div><b>“축제 곳곳에 숨겨진 단서를 찾아보세요!”</b></div><p class="muted">보놈을 만나려면 특별 초대권이 필요합니다. 축제 입구부터 간식 카페까지 여덟 가지 미션을 차례로 해결하세요. 영어 지문을 읽고 문제를 푼 뒤, 장면 속 물건을 클릭해 숨겨진 영어 단어를 모으세요. 단어를 올바른 순서로 조합하면 비밀 글자를 얻을 수 있습니다.</p><p class="muted"><b>게임 방법</b><br>① 영어 지문을 읽고 세 가지 문제를 풉니다.<br>② 장면 속 물건을 눌러 숨겨진 영어 단어를 모두 찾습니다.<br>③ 찾은 단어 카드를 올바른 순서로 클릭해 조합합니다.<br>④ 조합에 성공하면 비밀 글자를 얻습니다.<br>⑤ 여덟 장소의 비밀 글자를 모아 축제의 비밀 암호를 완성하세요.</p><div class="actions">
+<button class="primary" id="startBtn">축제 탐험 시작하기 →</button>
+</div></section>
+<section class="card hidden" id="game"><span class="tag" id="roomTag"></span><h2 id="roomTitle"></h2><p class="muted" id="roomIntro"></p><div class="scene"><div class="art" id="roomArt"></div><b id="sceneCaption"></b><div class="hot" id="hotspots"></div></div><div class="question"><b>숨겨진 단서</b><p class="muted" id="clueText">장면 속 물건을 눌러 단서를 찾아보세요.</p></div><h3 style="font-size:14px;margin:17px 0 6px">영어 지문 읽기</h3><div class="passage" id="passage"></div><div class="question" id="quizCard"><b id="question"></b><div class="options" id="options" style="margin-top:12px"></div><div class="feedback" id="feedback" aria-live="polite"></div><div class="actions"><button class="secondary" id="hintBtn">힌트 보기</button><button class="primary" id="nextBtn" disabled>다음 장소로 →</button></div></div>
+<div class="question hidden" id="wordPuzzle">
+  <b>숨겨진 영어 단어를 조합하라!</b>
+  <p class="muted" id="wordInstruction">장면 속 물건을 눌러 숨겨진 단어를 모두 찾으세요.</p>
+  <div class="letters" id="wordInventory"></div>
+  <p class="muted" style="margin:12px 0 6px">찾은 단어를 올바른 순서로 클릭하세요.</p>
+  <div class="hot" id="wordTiles"></div>
+  <p class="muted" id="wordSequence">조합한 단어: 아직 없음</p>
+  <p class="feedback" id="wordFeedback" aria-live="polite"></p>
+  <div class="actions"><button class="secondary" id="wordClear">다시 조합하기</button><button class="primary hidden" id="continueRoom">다음 방으로 →</button></div>
+</div>
+<b style="font-size:13px">모은 비밀 글자</b><div class="letters" id="letters"></div></section>
+<section class="card hidden center" id="complete"><div class="art">🎉☃️🎟️</div><h2>모든 미션 성공!</h2><p class="muted">여덟 가지 미션을 모두 해결하고 비밀 초대권을 찾았습니다.</p><div class="ticket"><div style="font-size:12px;letter-spacing:2px">SPECIAL INVITATION</div><h2>퀘벡 겨울 축제</h2><div class="big">FESTIVAL</div><b>특별 만남 초대권</b><p>퀘벡 겨울 축제의 특별한 순간에 초대합니다.</p><hr style="border:0;border-top:1px dashed #a47b30;margin:18px 0"><p>초대받은 탐험가: __________________</p><p>날짜: __________________</p><div style="font-weight:bold;margin-top:14px">FESTIVAL EXPLORER</div></div><p class="muted printnote">초대권을 인쇄해 보세요.</p><div class="actions" style="justify-content:center"><button class="primary" id="printBtn">초대권 인쇄하기</button><button class="secondary" id="restartBtn">처음부터 다시 하기</button></div></section>
+
+<div class="footer">THE QUEBEC WINTER CARNIVAL · ENGLISH ESCAPE ROOM</div></div>
+<script>
+const M=[
+{tag:'MISSION 1 · 축제 입구',title:"퀘벡 겨울 축제에 오신 것을 환영합니다!",intro:"축제 입구에 도착했습니다. 마스코트 보놈을 만나고 축제 정보를 확인하세요.",art:"☃️ 🎩 🎟️",caption:"보놈의 특별 안내소",hot:[["🎩","빨간 모자","보놈은 커다란 빨간 모자를 쓰고 있습니다."],["🎀","특별한 벨트","보놈은 특별한 벨트도 착용하고 있습니다."],["📅","축제 달력","축제는 보통 1월과 2월 사이에 10일 동안 열립니다."]],pass:"Hello! Welcome to the Quebec Winter Carnival. I am Bonhomme, the mascot of the carnival. I am a big snowman. As you can see, I’m wearing a big red hat and a special belt. Bonhomme means “good man” in French. The Quebec Winter Carnival is usually held for 10 days between January and February in Quebec, Canada.",q:"Q1. 보놈에 대한 설명으로 옳은 것은?",opts:["He is a snowman who wears two special items.","He is a man who builds the ice palace every year.","His name means “winter festival” in French.","He visits Quebec only in February."],a:0,hint:"보놈의 모습과 이름의 뜻을 설명하는 부분을 각각 확인하세요.",why:"보놈은 눈사람이며 커다란 빨간 모자와 특별한 벨트를 착용합니다.",letter:'F',nav:"🎪<br>축제 입구",extraQuestions:[{"q":"빈칸에 알맞은 단어를 쓰세요.\nBonhomme means “______ man” in French.","answerText":"good","hint":"보놈이라는 이름의 프랑스어 뜻을 확인하세요.","why":"Bonhomme은 프랑스어로 ‘good man’을 뜻합니다."},{"q":"빈칸에 알맞은 달 이름을 쓰세요.\nThe carnival is held between January and ______.","answerText":"February","hint":"축제가 열리는 두 달을 확인하세요.","why":"축제는 January와 February 사이에 열립니다."}]},
+{tag:'MISSION 2 · 축제 일정 게시판',title:"축제 일정 게시판을 확인하라!",intro:"축제 입구 옆 일정 게시판을 발견했습니다. 축제가 언제, 얼마나 열리는지 알아내세요.",art:"📅 🎪 ❄️",caption:"축제 일정과 기간을 확인하세요",hot:[["📅","축제 달력","축제는 1월과 2월 사이에 열립니다."],["🔟","10일 일정","축제는 10일 동안 진행됩니다."],["🇨🇦","개최 장소","축제는 캐나다 퀘벡에서 열립니다."]],pass:"The Quebec Winter Carnival is usually held for 10 days between January and February in Quebec, Canada. People from many places come to enjoy the winter activities and meet Bonhomme, the carnival mascot.",q:"Q2. 빈칸에 알맞은 숫자를 쓰세요.\nThe Quebec Winter Carnival is usually held for ______ days.",opts:[],type:"fill",answerText:"10",a:0,hint:"첫 번째 문장에서 축제 기간을 나타내는 숫자를 찾으세요.",why:"퀘벡 겨울 축제는 보통 10일 동안 열립니다.",letter:'E',nav:"📅<br>축제 일정",extraQuestions:[{"q":"빈칸에 알맞은 동사를 쓰세요.\nPeople come to enjoy winter activities and ______ Bonhomme.","answerText":"meet","hint":"사람들이 보놈을 어떻게 하는지 문장에서 찾아보세요.","why":"사람들은 겨울 활동을 즐기고 보놈을 만나러 옵니다."},{"q":"빈칸에 알맞은 나라 이름을 쓰세요.\nThe carnival is held in Quebec, ______.","answerText":"Canada","hint":"퀘벡이 위치한 나라를 지문에서 확인하세요.","why":"퀘벡은 캐나다에 있습니다."}]},
+{tag:'MISSION 3 · 얼음 궁전',title:"보놈의 얼음 궁전",intro:"보놈의 집인 얼음 궁전에 도착했습니다. 궁전과 얼음 정원의 단서를 찾아보세요.",art:"🏰 ❄️ 💎",caption:"얼음과 눈으로 만든 반짝이는 궁전",hot:[["🏰","얼음 궁전","새로운 얼음 궁전은 매년 지어집니다."],["🌲","얼음 조각","나무, 꽃, 동물 모양의 얼음 조각을 볼 수 있습니다."],["💡","밤의 조명","밤에는 많은 조명으로 궁전이 더욱 아름답습니다."],["🎵","공연 무대","콘서트와 공연도 즐길 수 있습니다."]],pass:"This is my ice palace. Every year, a new ice palace is built for the carnival. So, I have a new home each year! Because the palace is made of ice and snow, it shines beautifully during the day. At night, it is even more beautiful with many lights. You can see amazing ice sculptures of trees, flowers, and animals here. You can also enjoy exciting concerts and performances.",q:"Q3. 빈칸에 알맞은 단어를 쓰세요.\nAt night, the ice palace shines beautifully with many ______.",opts:[],type:"fill",answerText:"lights",a:0,hint:"밤에 궁전이 더욱 아름다워지는 이유를 설명하는 문장을 찾아보세요.",why:"밤에는 많은 조명(lights)으로 궁전이 더욱 아름답게 빛납니다.",letter:'S',nav:"🏰<br>얼음 궁전",extraQuestions:[{"q":"빈칸에 알맞은 과거분사를 쓰세요.\nA new ice palace is ______ every year.","answerText":"built","hint":"궁전이 매년 새로 어떻게 되는지 수동태 표현을 찾아보세요.","why":"새로운 얼음 궁전은 매년 지어집니다."},{"q":"빈칸에 알맞은 단어를 쓰세요.\nThe palace is made of ice and ______.","answerText":"snow","hint":"얼음 궁전을 만드는 두 가지 재료를 확인하세요.","why":"궁전은 얼음과 눈으로 만들어집니다."}]},
+{tag:'MISSION 4 · 얼음 궁전 갤러리',title:"얼음 조각 갤러리의 비밀",intro:"궁전 안쪽에는 아름다운 얼음 조각들이 전시되어 있습니다. 어떤 모양의 조각이 있는지 확인하세요.",art:"🌲 🌸 🐘",caption:"얼음으로 만든 다양한 조각 작품",hot:[["🌲","나무 조각","나무 모양의 얼음 조각이 있습니다."],["🌸","꽃 조각","꽃 모양의 얼음 조각이 있습니다."],["🐾","동물 조각","동물 모양의 얼음 조각도 볼 수 있습니다."],["🎭","공연장","콘서트와 공연도 열립니다."]],pass:"The ice palace is full of amazing ice sculptures. You can see sculptures of trees, flowers, and animals. The palace is also a place for concerts and performances. Visitors can enjoy the beautiful art and exciting shows.",q:"Q4. 다음 중 지문에서 얼음 조각으로 언급되지 않은 것은?",opts:["Trees","Flowers","Animals","Birds"],a:3,hint:"얼음 조각의 모양 세 가지를 나열한 문장을 찾아보세요.",why:"지문에는 나무, 꽃, 동물 조각이 언급되지만 새 조각은 나오지 않습니다.",letter:'T',nav:"🖼️<br>얼음 조각",extraQuestions:[{"q":"빈칸에 알맞은 단어를 쓰세요.\nVisitors can enjoy concerts and ______.","answerText":"performances","hint":"콘서트와 함께 즐길 수 있는 것을 지문에서 찾아보세요.","why":"방문객들은 콘서트와 공연을 즐길 수 있습니다."},{"q":"빈칸에 알맞은 단어를 쓰세요.\nYou can see sculptures of trees, flowers, and ______.","answerText":"animals","hint":"얼음 조각의 세 가지 소재를 확인하세요.","why":"얼음 조각에는 나무, 꽃, 동물이 있습니다."}]},
+{tag:'MISSION 5 · 터보건 활강장',title:"짜릿한 터보건 활강장",intro:"빠른 속도로 내려가는 터보건 활강장입니다. 썰매의 정체와 활강장의 길이를 확인하세요.",art:"🛷 ⛰️ ❄️",caption:"200미터 길이의 신나는 썰매 코스",hot:[["🛷","터보건","터보건은 길고 폭이 좁은 썰매입니다."],["📏","200미터","활강장의 길이는 200미터입니다."],["🏰","성","왼쪽에서 유명한 큰 성을 볼 수 있습니다."],["🌊","얼음 강","오른쪽에는 아름다운 얼음 강이 보입니다."]],pass:"The toboggan slide was built in 1884 and is 200 meters long. A toboggan is a long narrow sled. If you like speed, get on the toboggan. It is so fast that you will feel like you are on a roller coaster. While you’re sliding down, you can enjoy amazing views of Quebec. You can see a huge famous castle on your left. On your right, you can see a beautiful icy river.",q:"Q5. 글쓴이가 터보건을 롤러코스터에 비유한 이유는 무엇인가요?",opts:["Because the ride is fast and exciting","Because the sled moves in a circle","Because the slide is inside a castle","Because people ride it over the river"],a:0,hint:"터보건을 타면 어떤 느낌이 든다고 했는지 확인하세요.",why:"지문은 터보건이 매우 빨라 롤러코스터를 타는 것 같다고 설명합니다.",letter:'I',nav:"🛷<br>터보건",extraQuestions:[{"q":"빈칸에 알맞은 연도를 쓰세요.\nThe toboggan slide was built in ______.","answerText":"1884","hint":"터보건 활강장이 만들어진 연도를 확인하세요.","why":"터보건 활강장은 1884년에 만들어졌습니다."},{"q":"빈칸에 알맞은 명사를 쓰세요.\nA toboggan is a long narrow ______.","answerText":"sled","hint":"터보건이 무엇인지 설명하는 문장을 찾아보세요.","why":"Toboggan은 길고 좁은 썰매입니다."}]},
+{tag:'MISSION 6 · 터보건 전망대',title:"터보건에서 바라본 풍경",intro:"터보건을 타고 내려오며 주변 풍경을 살펴봅니다. 지문에 나온 장소를 정확히 찾아보세요.",art:"🏰 🛷 🌊",caption:"왼쪽과 오른쪽에 무엇이 보일까요?",hot:[["⬅️","왼쪽 풍경","왼쪽에는 크고 유명한 성이 보입니다."],["➡️","오른쪽 풍경","오른쪽에는 아름다운 얼음 강이 보입니다."],["📏","활강장 길이","터보건 활강장은 200미터 길이입니다."]],pass:"While you’re sliding down the toboggan slide, you can enjoy amazing views of Quebec. You can see a huge famous castle on your left. On your right, you can see a beautiful icy river.",q:"Q6. 빈칸에 알맞은 방향 표현을 순서대로 쓰세요.\nYou can see a castle on your ______ and an icy river on your ______.",opts:[],type:"fill",answerText:"left right",a:0,hint:"성(castle)과 얼음 강(icy river)이 각각 어느 쪽에 있는지 확인하세요.",why:"성은 왼쪽(left), 얼음 강은 오른쪽(right)에 있습니다.",letter:'V',nav:"🌄<br>터보건 전망대",extraQuestions:[{"q":"빈칸에 알맞은 방향 표현을 쓰세요.\nA huge famous castle is on your ______.","answerText":"left","hint":"성은 어느 쪽에 보인다고 했나요?","why":"성은 왼쪽(left)에 있습니다."},{"q":"빈칸에 알맞은 방향 표현을 쓰세요.\nA beautiful icy river is on your ______.","answerText":"right","hint":"얼음 강은 어느 쪽에 보인다고 했나요?","why":"얼음 강은 오른쪽(right)에 있습니다."}]},
+{tag:'MISSION 7 · 카누 경기장',title:"얼음 위의 카누 경주",intro:"강 주변에 많은 사람들이 모여 있습니다. 얼음 강에서 펼쳐지는 카누 경기를 살펴보세요.",art:"🛶 🧊 🌊",caption:"얼음에 갇힌 카누 팀을 도와주세요!",hot:[["🛶","카누","팀들은 얼음 강을 따라 경주합니다."],["👥","팀 구성","한 팀은 보통 다섯 명으로 구성됩니다."],["🧊","얼음에 갇힌 카누","팀원들은 카누를 밀어 물로 이동시킵니다."],["🏁","결승선","경주 거리는 약 3킬로미터입니다."]],pass:"If you see a large crowd along the river, it’s time to watch the Ice Canoe Race. Canoe teams have to race through the icy river for about three kilometers. Teams are usually made up of five members, and both men and women can join the team. One team is stuck in the ice and can’t move! The members have to push their canoe on the ice to get to the water. The race is so exciting that you will forget about the cold.",q:"Q7. 다음 중 카누 경기에 대한 설명으로 지문과 일치하는 것은?",opts:["Each team must have exactly five men.","Only experienced canoeists can join.","Teams may include both men and women.","Teams avoid the ice and stay in the water."],a:2,hint:"팀의 구성원을 설명하는 문장을 자세히 읽어보세요.",why:"지문에 따르면 팀은 보통 다섯 명으로 구성되며 남성과 여성 모두 참가할 수 있습니다.",letter:'A',nav:"🛶<br>카누 경기",extraQuestions:[{"q":"빈칸에 알맞은 단어를 쓰세요.\nCanoe teams race for about three ______.","answerText":"kilometers","hint":"경주 거리를 나타내는 단위를 확인하세요.","why":"카누 팀은 약 3킬로미터를 경주합니다."},{"q":"빈칸에 알맞은 숫자를 영어로 쓰세요.\nTeams are usually made up of ______ members.","answerText":"five","hint":"한 팀의 보통 인원수를 확인하세요.","why":"한 팀은 보통 다섯 명으로 구성됩니다."}]},
+{tag:'MISSION 8 · 간식 카페',title:"맛있는 간식 카페",intro:"마지막 장소인 간식 카페입니다. 메이플 태피를 만드는 방법을 확인하세요.",art:"🍁 ☕ 🍭",caption:"핫초콜릿과 메이플 태피",hot:[["☕","핫초콜릿","추운 날씨에 잘 어울리는 따뜻한 음료입니다."],["🍁","메이플 시럽","뜨거운 메이플 시럽을 눈 위에 붓습니다."],["🥢","막대","시럽 위에 막대를 놓습니다."],["🍭","메이플 태피","막대를 빠르게 돌돌 말면 완성됩니다."]],pass:"After all these exciting activities, I’m really hungry. There are many delicious treats to eat at the carnival. How about a cup of hot chocolate? It’s always the perfect drink in cold weather. You also have to try maple taffy. Pour hot maple syrup on the snow. Then place a stick on the syrup and quickly roll it around. Now, you have delicious maple taffy!",q:"Q8. 빈칸에 알맞은 동사를 쓰세요.\nThen quickly ______ it around.",opts:[],type:"fill",answerText:"roll",a:0,hint:"메이플 태피를 만드는 마지막 단계를 찾아보세요.",why:"막대를 시럽 위에 놓은 다음 빠르게 돌돌 말아야 합니다.",letter:'L',extraQuestions:[{"q":"빈칸에 알맞은 단어를 쓰세요.\nHot chocolate is the perfect drink in cold ______.","answerText":"weather","hint":"핫초콜릿을 마시기 좋은 날씨를 설명하는 표현을 찾아보세요.","why":"핫초콜릿은 추운 날씨에 잘 어울리는 음료입니다."},{"q":"빈칸에 알맞은 단어를 쓰세요.\nPour hot maple syrup on the ______.","answerText":"snow","hint":"뜨거운 메이플 시럽을 어디에 붓나요?","why":"뜨거운 메이플 시럽을 눈 위에 붓습니다."}]}
+];
+let idx=0,done=[],solved=false;const $=id=>document.getElementById(id);
+function update(){
+ const total=M.length, completed=M.filter((m,i)=>done[i]).length;
+ $("progressLabel").textContent=completed+" / "+total+" 완료";
+ $("progressFill").style.width=(completed/total*100)+"%";
+ $("roomLabel").textContent="MISSION "+Math.min(idx+1,total)+" / "+total;
+ $("roomNav").innerHTML=M.map((m,i)=>`<span class="${done[i]?"done":i===idx?"active":""}">${m.nav||("미션 "+(i+1))}</span>`).join("");
+ $("letters").innerHTML=M.map((m,i)=>`<span class="letter ${done[i]?"found":""}">${done[i]?m.letter:"?"}</span>`).join("");
+}
+
+const WORD_PUZZLES=[{"clue":"보놈을 소개하는 문장을 완성하세요.","words":[["good","좋은"],["man","사람"],["means","의미한다"]],"answer":["means","good","man"]},{"clue":"축제와 개최 지역, 나라를 순서대로 조합하세요.","words":[["Canada","캐나다"],["Quebec","퀘벡"],["carnival","축제"]],"answer":["carnival","Quebec","Canada"]},{"clue":"얼음 궁전의 특징을 나타내는 세 단어를 조합하세요.","words":[["shines","빛난다"],["ice","얼음"],["palace","궁전"]],"answer":["ice","palace","shines"]},{"clue":"얼음 조각의 소재를 지문에 나온 순서대로 조합하세요.","words":[["animals","동물"],["trees","나무"],["flowers","꽃"]],"answer":["trees","flowers","animals"]},{"clue":"터보건을 설명하는 세 단어를 조합하세요.","words":[["sled","썰매"],["narrow","좁은"],["long","긴"]],"answer":["long","narrow","sled"]},{"clue":"성의 위치를 나타내는 표현을 조합하세요.","words":[["left","왼쪽"],["castle","성"],["on","~에"]],"answer":["castle","on","left"]},{"clue":"카누 팀의 인원수를 나타내는 표현을 조합하세요.","words":[["members","구성원들"],["five","다섯"],["team","팀"]],"answer":["five","team","members"]},{"clue":"메이플 태피의 주요 재료를 조합하세요.","words":[["syrup","시럽"],["hot","뜨거운"],["maple","메이플"]],"answer":["hot","maple","syrup"]}];
+let foundWords=[], pickedWords=[], wordStage=false;
+let qIndex=0;
+function getQuestions(m){
+ const base={q:m.q,opts:m.opts||[],type:m.type||"choice",answerText:m.answerText||"",a:m.a,hint:m.hint,why:m.why};
+ return [base,...(m.extraQuestions||[]).map(x=>({...x,opts:[],type:"fill"}))];
+}
+function currentQuestion(){return getQuestions(M[idx])[qIndex]}
+function renderQuestion(){
+ const m=M[idx], q=currentQuestion(), total=getQuestions(m).length;
+ solved=false;
+ $("question").textContent=`문제 ${qIndex+1} / ${total}\n${q.q}`;
+ $("clueText").textContent="장면 속 물건을 눌러 단서를 찾아보세요.";
+ $("feedback").textContent="";
+ $("nextBtn").disabled=true;
+ $("nextBtn").textContent=qIndex===total-1?(idx===M.length-1?"초대권 확인하기 →":"다음 미션으로 →"):"다음 문제로 →";
+ if(q.type==="fill"){
+  $("options").innerHTML=`<input id="fillAnswer" type="text" autocomplete="off" placeholder="Type your answer here" style="width:100%;padding:12px;border:1px solid #c8d8e2;border-radius:9px;font-size:15px"><button class="primary" id="checkFill" style="margin-top:8px">정답 확인</button>`;
+  $("checkFill").onclick=checkFill;
+  $("fillAnswer").addEventListener("keydown",e=>{if(e.key==="Enter")checkFill()});
+ }else{
+  $("options").innerHTML=q.opts.map((o,i)=>`<button class="option" data-i="${i}">${"ABCD"[i]}. ${o}</button>`).join("");
+  $("options").querySelectorAll("button").forEach(b=>b.onclick=()=>answer(+b.dataset.i));
+ }
+ $("hintBtn").onclick=()=>{$("feedback").textContent="힌트: "+(q.hint||m.hint||"지문에서 관련 정보를 찾아보세요.");$("feedback").style.color="#63798a"};
+}
+
+function show(){
+ qIndex=0; foundWords=[]; pickedWords=[]; wordStage=false;
+ $("welcome").classList.add("hidden");$("complete").classList.add("hidden");$("game").classList.remove("hidden");
+ $("quizCard").classList.remove("hidden");$("wordPuzzle").classList.add("hidden");
+ let m=M[idx], wp=WORD_PUZZLES[idx];
+ $("roomTag").textContent=m.tag;$("roomTitle").textContent=m.title;$("roomIntro").textContent=m.intro;
+ $("roomArt").textContent=m.art;$("sceneCaption").textContent=m.caption;$("passage").textContent=m.pass;
+ $("clueText").textContent="문제를 모두 푼 뒤 물건을 클릭해 숨겨진 단어를 모으세요.";
+ $("hotspots").innerHTML=m.hot.map((h,i)=>`<button data-i="${i}">${h[0]} ${h[1]}</button>`).join("");
+ $("hotspots").querySelectorAll("button").forEach(b=>b.onclick=()=>{
+   if(!wordStage){$("clueText").textContent="먼저 이 장소의 문제를 모두 해결하세요.";return;}
+   const i=+b.dataset.i, word=wp.words[i];
+   if(!word){$("clueText").textContent=m.hot[i][2];return;}
+   if(foundWords.some(x=>x.word===word[0]))return;
+   foundWords.push({word:word[0],meaning:word[1]});
+   b.disabled=true;b.style.background="#d6eee1";
+   $("clueText").textContent=`단어 발견! ${word[0]} — ${word[1]}`;
+   renderWordHunt();
+ });
+ renderQuestion();update();
+}
+function markCorrect(q){
+ solved=true;
+ const last=qIndex===getQuestions(M[idx]).length-1;
+ $("feedback").textContent="정답입니다! "+(q.why||"")+(last?" 이제 장면 속 물건을 눌러 숨겨진 단어를 찾으세요.":" 다음 문제를 풀어보세요.");
+ $("feedback").style.color="#267b51";
+ $("nextBtn").disabled=false;
+ $("nextBtn").textContent=last?"숨겨진 단어 찾기 →":"다음 문제로 →";
+ $("options").querySelectorAll("button").forEach(b=>b.disabled=true);
+ const inp=$("fillAnswer");if(inp)inp.disabled=true;
+ const check=$("checkFill");if(check)check.disabled=true;
+}
+function checkFill(){
+ if(solved)return;
+ const q=currentQuestion();
+ const normalize=s=>String(s||"").trim().toLowerCase().replace(/[.!?]/g,"").replace(/\s+/g," ");
+ const raw=normalize($("fillAnswer").value), accepted=normalize(q.answerText);
+ if(raw===accepted){markCorrect(q)}
+ else{$("feedback").textContent="아직 정답이 아닙니다. 지문에서 핵심 표현을 다시 찾아보세요.";$("feedback").style.color="#ad6736"}
+}
+function answer(n){
+ if(solved)return;
+ const q=currentQuestion();
+ if(n===q.a){markCorrect(q)}
+ else{$("feedback").textContent="아쉽습니다. 지문을 다시 읽고 단서를 찾아보세요.";$("feedback").style.color="#ad6736"}
+}
+function renderWordHunt(){
+ const wp=WORD_PUZZLES[idx];
+ $("wordInstruction").textContent=wp.clue+` (${foundWords.length}/${wp.words.length}개 단어 발견)`;
+ $("wordInventory").innerHTML=foundWords.map(x=>`<span class="letter found" style="width:auto;padding:0 10px">${x.word}<small style="margin-left:5px;font-weight:normal">(${x.meaning})</small></span>`).join("");
+ if(foundWords.length===wp.words.length){
+   const shuffled=[...wp.words].reverse();
+   $("wordTiles").innerHTML=shuffled.map(x=>`<button class="secondary" data-word="${x[0]}">${x[0]}</button>`).join("");
+   $("wordTiles").querySelectorAll("button").forEach(b=>b.onclick=()=>pickWord(b.dataset.word));
+   $("wordFeedback").textContent="단어를 모두 찾았어요! 올바른 순서로 하나씩 클릭하세요.";
+ }else{
+   $("wordTiles").innerHTML="<span class='muted'>모든 물건을 눌러 단어를 찾아보세요.</span>";
+   $("wordFeedback").textContent="";
+ }
+ $("wordSequence").textContent="조합한 단어: "+(pickedWords.length?pickedWords.join("  →  "):"아직 없음");
+}
+function pickWord(word){
+ const wp=WORD_PUZZLES[idx];
+ if(pickedWords.includes(word)||pickedWords.length>=wp.answer.length)return;
+ pickedWords.push(word);
+ $("wordSequence").textContent="조합한 단어: "+pickedWords.join("  →  ");
+ if(pickedWords.length===wp.answer.length){
+   if(pickedWords.every((w,i)=>w===wp.answer[i])){
+     done[idx]=true;update();
+     $("wordFeedback").textContent="조합 성공! 비밀 글자 "+M[idx].letter+" 획득!";
+     $("wordFeedback").style.color="#267b51";
+     $("continueRoom").classList.remove("hidden");
+     $("wordTiles").querySelectorAll("button").forEach(b=>b.disabled=true);
+   }else{
+     $("wordFeedback").textContent="단어 순서가 맞지 않아요. 다시 조합해 보세요.";
+     $("wordFeedback").style.color="#ad6736";
+     pickedWords=[];
+     $("wordSequence").textContent="조합한 단어: 다시 시도하세요.";
+   }
+ }
+}
+$("wordClear").onclick=()=>{pickedWords=[];renderWordHunt()};
+$("continueRoom").onclick=()=>{if(idx<M.length-1){idx++;show()}else finish()};
+$("nextBtn").onclick=()=>{
+ const total=getQuestions(M[idx]).length;
+ if(!wordStage && qIndex<total-1){qIndex++;renderQuestion();return}
+ if(!wordStage && qIndex===total-1){
+   wordStage=true;$("quizCard").classList.add("hidden");$("wordPuzzle").classList.remove("hidden");
+   $("nextBtn").disabled=true;
+   $("wordTiles").innerHTML="<span class='muted'>장면 속 물건을 눌러 단어를 찾아보세요.</span>";
+   $("wordInventory").innerHTML="";$("wordSequence").textContent="조합한 단어: 아직 없음";
+   $("wordFeedback").textContent="";
+   $("continueRoom").classList.add("hidden");
+   $("clueText").textContent="이제 물건을 클릭해 숨겨진 단어를 수집하세요.";
+   return;
+ }
+};
+
+function finish(){$("game").classList.add("hidden");$("complete").classList.remove("hidden");$("roomLabel").textContent="미션 완료";$("progressLabel").textContent=M.length+" / "+M.length+" 완료";$("progressFill").style.width="100%"}
+$("startBtn").onclick=show;$("printBtn").onclick=()=>window.print();$("restartBtn").onclick=()=>{idx=0;done=[];foundWords=[];pickedWords=[];wordStage=false;$("complete").classList.add("hidden");$("game").classList.add("hidden");$("welcome").classList.remove("hidden");update()};update();
+
+</script></html>
